@@ -37,6 +37,7 @@ import mpicbg.spim.data.sequence.VoxelDimensions;
 import net.imglib2.IterableInterval;
 import net.imglib2.RandomAccessible;
 import net.imglib2.RandomAccessibleInterval;
+import net.imglib2.cache.img.DiskCachedCellImgFactory;
 import net.imglib2.converter.Converter;
 import net.imglib2.converter.RealTypeConverters;
 import net.imglib2.img.Img;
@@ -53,7 +54,6 @@ import net.imglib2.util.ValuePair;
 import net.imglib2.view.IntervalView;
 import net.imglib2.view.Views;
 import net.preibisch.legacy.io.IOFunctions;
-import net.preibisch.mvrecon.fiji.spimdata.imgloaders.AbstractImgLoader;
 import net.preibisch.mvrecon.fiji.spimdata.interestpoints.InterestPoint;
 import util.ImgLib2Tools;
 
@@ -617,7 +617,7 @@ public class DownsampleTools
 	{
 		if ( openAsFloat )
 		{
-			final Img< FloatType > floatImg = new CellImgFactory<FloatType>( new FloatType() ).create( img );
+			final Img< FloatType > floatImg = new DiskCachedCellImgFactory<FloatType>( new FloatType() ).create( img );
 
 			// TODO: replace with multithreaded RealTypeConverters.copyFromTo( ushortImg, floatImg );
 			copyFromToMultithreaded( img, floatImg );
@@ -631,7 +631,7 @@ public class DownsampleTools
 		else
 		{
 			final NativeType< ? > t = Util.getTypeFromInterval( img );
-			final Img completeImg = new CellImgFactory( t ).create( img );
+			final Img completeImg = new DiskCachedCellImgFactory( t ).create( img );
 
 			// TODO: replace with multithreaded RealTypeConverters.copyFromTo( ushortImg, floatImg );
 			copyFromToMultithreaded( img, completeImg );

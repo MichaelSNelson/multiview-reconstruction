@@ -94,6 +94,7 @@ like Selective Plane Illumination Microscopy (SPIM) Data.</description>
 	</ciManagement>
 
 	<properties>
+		<enforcer.skip>true</enforcer.skip>
 		<package-name>net.preibisch.mvrecon</package-name>
 
 		<license.licenseName>gpl_v2</license.licenseName>
